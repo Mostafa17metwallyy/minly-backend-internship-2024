@@ -1,4 +1,4 @@
-// import { Gender } from "src/entities/actor.entity";
+//import { Gender } from "src/entities/actor.entity";
 
 export class CreateActorDto {
     id:number
