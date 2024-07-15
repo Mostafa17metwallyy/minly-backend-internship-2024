@@ -15,7 +15,7 @@ export class Festival{
     @PrimaryGeneratedColumn("uuid")
     uuId: string;
 
-    // @ManyToMany(() => Movie, (movie) => movie.festivals)
-    // movies: Movie[];
+     @ManyToMany(() => Movie, (movie) => movie.festivalId)
+    movies: Movie[];
 }
 

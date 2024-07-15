@@ -6,12 +6,11 @@ export class CreateMovieDto {
     releaseDate:string;
     rating:number;
     moviePoster:string |null;
-    directorId: number;
     createdAt:Date  |null;
     updatedAt:Date |null;;
     trailer:string |null ;
     uuId: string;
+    directorId: number;
     actorId:number
-    directorsId:number
-    //festivalId:number
+    festivalId:number
 }

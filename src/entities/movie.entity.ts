@@ -35,15 +35,10 @@ export class Movie {
     director: Directors;
     actors: any;
 
-    // @ManyToMany(() => Festival, (festival) => festival.movies)
-    // @JoinTable()
-    // festivals: Festival[];
-
     @Column()
     actorId:number;
-
     @Column()
-    directorsId:number
+    directorId:number;
 
     @Column()
     festivalId:number

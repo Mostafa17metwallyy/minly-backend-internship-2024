@@ -2,10 +2,10 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOn
 import { Movie } from "./movie.entity";
 
 
-// export enum Gender {
-//     MALE = 'male',
-//     FEMALE = 'female',
-//   }
+ export enum Gender {
+     MALE = 'male',
+     FEMALE = 'female',
+ }
 
 @Entity()
 export class Actor{
@@ -21,12 +21,12 @@ export class Actor{
     @Column()
     birthDate:string
 
-    // @Column({
-    //     type: 'enum',
-    //     enum: Gender,
-    //     default: Gender.MALE,
-    //   })
-    //   gender: Gender;
+     @Column({
+         type: 'enum',
+         enum: Gender,
+        default: Gender.MALE,
+      })
+     gender: Gender;
       
 
     @Column()
