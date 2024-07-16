@@ -37,13 +37,13 @@ export class MoviesController {
           }
         }
 
-        @Get('sort')
+        @Get('paginated')
         async getMovies(
           @Query('sortBy') sortBy: 'releaseDate' | 'rating',
           @Query('page') page = 1,
           @Query('limit') limit = 8,
         ): Promise<{ data: Movie[]; count: number }> {
-          return this.moviesService.getSortedMovies(sortBy, Number(page), Number(limit));
+          return this.moviesService.getPaginatedMovies(sortBy, Number(page), Number(limit));
         }
 }
 

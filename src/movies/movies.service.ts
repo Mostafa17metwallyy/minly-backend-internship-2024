@@ -26,10 +26,10 @@ export class MoviesService {
         return await this.movieRepository.find({ where: searchCriteria });
       }
 
-      async getSortedMovies(
+      async getPaginatedMovies(
         sortBy: 'releaseDate' | 'rating',
-        page: number,
-        limit: number,
+        page: number=1,
+        limit: number=8,
       ): Promise<{ data: Movie[]; count: number }> {
         const order: any = {};
     
@@ -38,13 +38,13 @@ export class MoviesService {
         } else if (sortBy === 'rating') {
           order.rating = 'DESC';
         }
-    
+
         const [result, total] = await this.movieRepository.findAndCount({
-          order,
-          skip: (page - 1) * limit,
-          take: limit,
-        });
+        order,
+        skip: (page - 1) * limit,
+        take: limit,
+  });
     
         return { data: result, count: total };
       }
-    }
+      }
