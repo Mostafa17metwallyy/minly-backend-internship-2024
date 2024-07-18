@@ -41,7 +41,17 @@ export class Movie {
     directorId:number;
 
     @Column()
-    festivalId:number
+    festivalId:number;
+
+    @Column({nullable:true})
+    overview:string;
+
+    @Column({nullable:true})
+    language:string;
+
+    @Column({nullable:true})
+    genre:string;
+
         
 
 

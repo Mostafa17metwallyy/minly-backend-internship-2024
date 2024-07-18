@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from 'src/entities/movie.entity';
 import { Like, Repository } from 'typeorm';
@@ -47,4 +47,16 @@ export class MoviesService {
     
         return { data: result, count: total };
       }
+
+      async getMovieByUuid(uuId: string): Promise<Movie> {
+        const movie = await this.movieRepository.findOne({ where: { uuId } });
+        if (!movie) {
+          throw new NotFoundException(`Movie with UUID ${uuId} not found`);
+        }
+        return movie;
       }
+
+      async getMoviesByGenre(genre: string): Promise<Movie[]> {
+        return this.movieRepository.find({ where: { genre } });
+    }
+    }
