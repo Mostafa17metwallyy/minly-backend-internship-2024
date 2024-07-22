@@ -1,62 +1,70 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, Timestamp } from "typeorm";
-import { Directors } from "./director.entity";
-import { Festival } from "./festival.entity";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
+  JoinColumn,
+  Timestamp,
+  OneToMany,
+} from 'typeorm';
+import { Directors } from './director.entity';
+import { Festival } from './festival.entity';
+import { Actor } from './actor.entity';
 
 @Entity()
 export class Movie {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    title: string
+  @Column()
+  title: string;
 
-    @Column()
-    releaseDate:string;
+  @Column()
+  releaseDate: string;
 
-    @Column('decimal',{precision: 3, scale: 2, default: 0})
-    rating:number;
+  @Column('decimal', { precision: 3, scale: 2, default: 0 })
+  rating: number;
 
-    @Column({nullable:true})
-    moviePoster:string| null
+  @Column({ nullable: true })
+  moviePoster: string | null;
 
-    @Column({nullable:true})
-    trailer:string | null
+  @Column({ nullable: true })
+  trailer: string | null;
 
-    @Column({ type: 'timestamp', nullable: true })
-    createdAt: Date | null;
+  @Column({ type: 'timestamp', nullable: true })
+  createdAt: Date | null;
 
-    @Column({ type: 'timestamp', nullable: true })
-    updatedAt: Date | null;
+  @Column({ type: 'timestamp', nullable: true })
+  updatedAt: Date | null;
 
-    @PrimaryGeneratedColumn("uuid")
-    uuId: string;
+  @PrimaryGeneratedColumn('uuid')
+  uuId: string;
 
-    @ManyToOne(() => Directors, (director) => director.movies)
-    director: Directors;
-    actors: any;
+  @ManyToOne(() => Directors, (director) => director.movies)
+  director: Directors;
+  actors: any;
 
-    @Column()
-    actorId:number;
-    @Column()
-    directorId:number;
+  @ManyToMany(() => Actor, (actor) => actor.movies)
+  @JoinTable()
+  actor: Actor[];
 
-    @Column()
-    festivalId:number;
+  @Column()
+  actorId: number;
 
-    @Column({nullable:true})
-    overview:string;
+  @Column()
+  directorId: number;
 
-    @Column({nullable:true})
-    language:string;
+  @Column()
+  festivalId: number;
 
-    @Column({nullable:true})
-    genre:string;
+  @Column({ nullable: true })
+  overview: string;
 
-        
+  @Column({ nullable: true })
+  language: string;
 
-
-
+  @Column({ nullable: true })
+  genre: string;
 }
-
-
- 
