@@ -39,7 +39,7 @@ export class Movie {
   @Column({ type: 'timestamp', nullable: true })
   updatedAt: Date | null;
 
-  @PrimaryGeneratedColumn('uuid')
+  @Column({ nullable: true })
   uuId: string;
 
   @ManyToOne(() => Directors, (director) => director.movies)

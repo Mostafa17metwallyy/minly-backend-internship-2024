@@ -12,7 +12,7 @@ export class Festival{
     @Column()
     date:Date
 
-    @PrimaryGeneratedColumn("uuid")
+    @Column({ nullable: true })
     uuId: string;
 
      @ManyToMany(() => Movie, (movie) => movie.festivalId)

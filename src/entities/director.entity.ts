@@ -48,7 +48,7 @@ export class Directors{
     @Column({ type: 'timestamp', nullable: true })
     updatedAt: Date | null;
 
-    @PrimaryGeneratedColumn("uuid")
+    @Column({ nullable: true })
     uuId: string;
 
 

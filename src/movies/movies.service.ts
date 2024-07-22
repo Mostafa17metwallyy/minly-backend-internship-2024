@@ -14,7 +14,9 @@ export class MoviesService {
         return await this.movieRepository.save(createMovieDto);
     }
     async findAll() : Promise<Movie[]> {
-        return  this.movieRepository.find();
+        return  this.movieRepository.find({
+
+        });
     }
 
     async searchMovies(title?: string): Promise<Movie[]> {
@@ -49,7 +51,7 @@ export class MoviesService {
       }
 
       async getMovieByUuid(uuId: string): Promise<Movie> {
-        const movie = await this.movieRepository.findOne({ where: { uuId } });
+        const movie = await this.movieRepository.findOne({ where: { uuId } , relations:['actor']});
         if (!movie) {
           throw new NotFoundException(`Movie with UUID ${uuId} not found`);
         }
