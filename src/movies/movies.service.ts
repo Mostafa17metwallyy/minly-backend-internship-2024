@@ -51,7 +51,7 @@ export class MoviesService {
       }
 
       async getMovieByUuid(uuId: string): Promise<Movie> {
-        const movie = await this.movieRepository.findOne({ where: { uuId } , relations:['actor']});
+        const movie = await this.movieRepository.findOne({ where: { uuId } , relations:['actor','movieActorActors','movieActorActors.actor']});
         if (!movie) {
           throw new NotFoundException(`Movie with UUID ${uuId} not found`);
         }
