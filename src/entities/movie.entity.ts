@@ -13,6 +13,7 @@ import { Directors } from './director.entity';
 import { Festival } from './festival.entity';
 import { Actor } from './actor.entity';
 import { MovieActorActor } from './movieActorActor.entity';
+import { Awards } from './award.entity';
 
 @Entity()
 export class Movie {
@@ -69,6 +70,9 @@ export class Movie {
   @Column({ nullable: true })
   genre: string;
 
-  @OneToMany(() => MovieActorActor, movieActorActor => movieActorActor.movie)
+  @OneToMany(() => MovieActorActor, (movieActorActor) => movieActorActor.movie)
   movieActorActors: MovieActorActor[];
+
+  @ManyToMany(() => Awards, (award) => award.movies)
+  awards: Awards[];
 }
