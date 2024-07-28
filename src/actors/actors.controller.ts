@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { Actor } from 'src/entities/actor.entity';
 import { ActorsService } from './actors.service';
 import { CreateActorDto } from './dtos/createActorDto';
@@ -33,6 +33,12 @@ export class ActorsController {
             console.error('Error searching actors:', error.message);
             throw new HttpException('Failed to search actors', HttpStatus.INTERNAL_SERVER_ERROR);
           }
+        }
+
+        @Get(':id')
+        async getActor(@Param('id') id: number): Promise<Actor> {
+          console.log(`Received request for actor with ID: ${id}`); // Debug log
+          return this.actorsService.getActorById(id);
         }
         
 }

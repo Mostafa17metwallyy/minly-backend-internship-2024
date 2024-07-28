@@ -8,8 +8,6 @@ import { MoviesModule } from './movies/movies.module';
 import { ActorsModule } from './actors/actors.module';
 import { DirectorsModule } from './directors/directors.module';
 import { FestivalModule } from './festival/festival.module';
-import { AwardsController } from './awards/awards.controller';
-import { AwardsService } from './awards/awards.service';
 import { AwardsModule } from './awards/awards.module';
 import typeorm from './config/typeorm';
 
