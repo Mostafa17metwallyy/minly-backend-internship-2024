@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from 'src/entities/movie.entity';
 import { Like, Repository } from 'typeorm';
 import { CreateMovieDto } from './dtos/createMovieDto';
+import { Awards } from 'src/entities/award.entity';
 
 @Injectable()
 export class MoviesService {
@@ -51,7 +52,7 @@ export class MoviesService {
       }
 
       async getMovieByUuid(uuId: string): Promise<Movie> {
-        const movie = await this.movieRepository.findOne({ where: { uuId } , relations:['actor','movieActorActors','movieActorActors.actor']});
+        const movie = await this.movieRepository.findOne({ where: { uuId } , relations:['actor','movieActorActors','movieActorActors.actor','awards']});
         if (!movie) {
           throw new NotFoundException(`Movie with UUID ${uuId} not found`);
         }

@@ -59,4 +59,5 @@ export class MoviesController {
             throw new HttpException('Failed to retrieve movies by genre', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
