@@ -26,19 +26,15 @@ export class ActorsService {
     return await this.actorsRepository.find({ where: searchCriteria });
   }
 
-  async getActorById(id: number): Promise<Actor> {
-    console.log(`Fetching actor with ID: ${id}`); // Debug log
+  async getActorByUuId(uuId: string): Promise<Actor> {
     const actor = await this.actorsRepository.findOne({
-      where: { id },
-      relations: ['movies', 'awards'],
+      where: { uuId },
+      relations: [ 'awards','movieActorActors','movieActorActors.movie'],
     });
 
     if (!actor) {
-      console.log(`Actor with ID ${id} not found`); // Debug log
-      throw new NotFoundException(`Actor with ID ${id} not found`);
+      throw new NotFoundException(`Actor with ID ${uuId} not found`);
     }
-
-    console.log(`Found actor: ${JSON.stringify(actor)}`); // Debug log
     return actor;
   }
 }
