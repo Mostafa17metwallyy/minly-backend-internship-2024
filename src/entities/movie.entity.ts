@@ -70,6 +70,9 @@ export class Movie {
   @Column({ nullable: true })
   genre: string;
 
+  @Column({nullable: true})
+  duration:string;
+
   @OneToMany(() => MovieActorActor, (movieActorActor) => movieActorActor.movie)
   movieActorActors: MovieActorActor[];
 
