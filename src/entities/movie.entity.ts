@@ -31,9 +31,7 @@ export class Movie {
 
   @Column({ nullable: true })
   moviePoster: string | null;
-  @Column()
-  moviePoster: string ;
-
+  
   @Column({ nullable: true })
   trailer: string | null;
 
