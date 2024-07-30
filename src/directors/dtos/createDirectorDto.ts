@@ -9,9 +9,6 @@ export class CreateDirectorDto {
     age:number;
     birthDate:string
 
-    // @IsEnum(Gender)
-    // gender: Gender;
-
     nationality:string
     bio:string
     numberOfAwards:number
@@ -21,6 +18,3 @@ export class CreateDirectorDto {
     uuId: string;
 }
 
-// function IsEnum(Gender:any): (target: CreateDirectorDto, propertyKey: "gender") => void {
-//     throw new Error("Function not implemented.");
-// }

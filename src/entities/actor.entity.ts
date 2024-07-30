@@ -3,9 +3,6 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToMany,
-  JoinTable,
-  ManyToOne,
-  JoinColumn,
   OneToMany,
 } from 'typeorm';
 import { Movie } from './movie.entity';

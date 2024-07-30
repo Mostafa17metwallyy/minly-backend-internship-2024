@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { Movie } from "./movie.entity";
-import { Actor } from "./actor.entity";
 
 
 export enum Gender {
@@ -54,10 +53,5 @@ export class Directors{
 
     @OneToMany(() => Movie, (movie) => movie.director)
     movies: Movie[];
-
-    @ManyToMany(() => Actor, (actor) => actor.movies)
-    @JoinTable()
-    actors: Actor[];
-
 }
 

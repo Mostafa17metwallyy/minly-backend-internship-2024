@@ -37,7 +37,6 @@ export class ActorsController {
 
         @Get(':uuid')
         async getActor(@Param('uuid') uuid: string): Promise<Actor> {
-          console.log(`Received request for actor with ID: ${uuid}`); 
           return this.actorsService.getActorByUuId(uuid);
         }
         
