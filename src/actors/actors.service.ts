@@ -1,8 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Actor } from 'src/entities/actor.entity';
 import { Like, Repository } from 'typeorm';
-import { CreateActorDto } from './dtos/createActorDto';
 
 @Injectable()
 export class ActorsService {
@@ -10,31 +9,40 @@ export class ActorsService {
     @InjectRepository(Actor)
     private actorsRepository: Repository<Actor>,
   ) {}
-  async createActor(CreateActorDto: CreateActorDto): Promise<Actor> {
-    return await this.actorsRepository.save(CreateActorDto);
-  }
+
   async findAllActors(): Promise<Actor[]> {
-    return this.actorsRepository.find();
+    try {
+      return await this.actorsRepository.find();
+    } catch (error) {
+      throw new HttpException(`Failed to retrieve actors, ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   async searchActors(name?: string): Promise<Actor[]> {
-    const searchCriteria: any = {};
-
-    if (name) {
-      searchCriteria.name = Like(`%${name}%`);
+    try {
+      const searchCriteria: any = {};
+      if (name) {
+        searchCriteria.name = Like(`%${name}%`);
+      }
+      return await this.actorsRepository.find({ where: searchCriteria });
+    } catch (error) {
+      throw new HttpException(`Failed to search actors, ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    return await this.actorsRepository.find({ where: searchCriteria });
   }
 
   async getActorByUuId(uuId: string): Promise<Actor> {
-    const actor = await this.actorsRepository.findOne({
-      where: { uuId },
-      relations: [ 'awards','movieActorActors','movieActorActors.movie'],
-    });
+    try {
+      const actor = await this.actorsRepository.findOne({
+        where: { uuId },
+        relations: ['awards', 'movieActorActors', 'movieActorActors.movie'],
+      });
 
-    if (!actor) {
-      throw new NotFoundException(`Actor with ID ${uuId} not found`);
+      if (!actor) {
+        throw new NotFoundException(`Actor with ID ${uuId} not found`);
+      }
+      return actor;
+    } catch (error) {
+      throw new HttpException(`Failed to retrieve actor, ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    return actor;
   }
 }

@@ -31,6 +31,8 @@ export class Movie {
 
   @Column({ nullable: true })
   moviePoster: string | null;
+  @Column()
+  moviePoster: string ;
 
   @Column({ nullable: true })
   trailer: string | null;
@@ -62,15 +64,19 @@ export class Movie {
   festivalId: number;
 
   @Column({ nullable: true })
+  @Column()
   overview: string;
 
   @Column({ nullable: true })
+  @Column()
   language: string;
 
   @Column({ nullable: true })
+  @Column()
   genre: string;
 
   @Column({nullable: true})
+  @Column()
   duration:string;
 
   @OneToMany(() => MovieActorActor, (movieActorActor) => movieActorActor.movie)

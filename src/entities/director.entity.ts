@@ -1,11 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { Movie } from "./movie.entity";
-
-
-export enum Gender {
-    MALE = 'male',
-    FEMALE = 'female',
-  }
+import { Gender } from "src/enum";
 
 @Entity()
 export class Directors{
@@ -39,12 +34,14 @@ export class Directors{
     numberOfAwards:number
 
     @Column({nullable:true})
+    @Column()
     picture:string
 
     @Column({ type: 'timestamp', nullable: true })
     createdAt: Date | null;
 
     @Column({ type: 'timestamp', nullable: true })
+    @Column({ type: 'timestamp'})
     updatedAt: Date | null;
 
     @Column({ nullable: true })

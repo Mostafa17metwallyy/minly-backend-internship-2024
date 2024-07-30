@@ -13,6 +13,7 @@ export class Festival{
     date:Date
 
     @Column({ nullable: true })
+    @Column()
     uuId: string;
 
      @ManyToMany(() => Movie, (movie) => movie.festivalId)

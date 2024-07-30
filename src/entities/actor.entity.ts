@@ -8,11 +8,8 @@ import {
 import { Movie } from './movie.entity';
 import { MovieActorActor } from './movieActorActor.entity';
 import { Awards } from './award.entity';
+import {Gender} from '../enum';
 
-export enum Gender {
-  MALE = 'male',
-  FEMALE = 'female',
-}
 
 @Entity()
 export class Actor {
@@ -42,15 +39,19 @@ export class Actor {
   bio: string;
 
   @Column({ nullable: true })
+  @Column()
   numberOfAwards: number;
 
   @Column({ nullable: true })
+  @Column()
   picture: string;
 
   @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp'})
   createdAt: Date | null;
 
   @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp'})
   updatedAt: Date | null;
 
   @Column({ nullable: true })
