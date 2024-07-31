@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ActorsController } from './actors.controller';
 import { ActorsService } from './actors.service';
-import { Actor } from 'src/entities/actor.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ActorRepository } from 'src/repo/actor.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Actor])],
+  imports: [TypeOrmModule.forFeature([ActorRepository])],
   controllers: [ActorsController],
   providers: [ActorsService]
 })

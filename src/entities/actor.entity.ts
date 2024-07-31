@@ -39,7 +39,6 @@ export class Actor {
   bio: string;
 
   @Column({ nullable: true })
-  @Column()
   numberOfAwards: number;
 
   @Column({ nullable: true })

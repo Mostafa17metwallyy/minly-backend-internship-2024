@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, HttpException, HttpStatus } from '@nestj
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from 'src/entities/movie.entity';
 import { Like, Repository } from 'typeorm';
+import {pagination_page,pagination_limit} from '../const/const.js'
 
 @Injectable()
 export class MoviesService {
@@ -32,8 +33,8 @@ export class MoviesService {
 
   async getPaginatedMovies(
     sortBy: 'releaseDate' | 'rating',
-    page = 1,
-    limit = 8,
+    page = pagination_page,
+    limit = pagination_limit,
   ): Promise<{ data: Movie[]; count: number }> {
     try {
       const order: any = {};
