@@ -1,12 +1,14 @@
+// src/actor/actor.module.ts
 import { Module } from '@nestjs/common';
-import { ActorsController } from './actors.controller';
-import { ActorsService } from './actors.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ActorRepository } from 'src/repo/actor.repository';
+import { Actor } from '../entities/actor.entity';
+import { ActorService } from '../actors/actors.service';
+import { ActorsController } from '../actors/actors.controller';
+import { ActorRepository } from '../repo/actor.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ActorRepository])],
+  imports: [TypeOrmModule.forFeature([Actor])],
+  providers: [ActorService, ActorRepository],
   controllers: [ActorsController],
-  providers: [ActorsService]
 })
-export class ActorsModule {}
+export class ActorModule {}

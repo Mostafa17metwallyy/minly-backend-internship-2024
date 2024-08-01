@@ -5,17 +5,19 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthModule } from './health/health.module';
 import { MoviesModule } from './movies/movies.module';
-import { ActorsModule } from './actors/actors.module';
+import { ActorModule } from './actors/actors.module';
 import { DirectorsModule } from './directors/directors.module';
-import { FestivalModule } from './festival/festival.module';
 import { AwardsModule } from './awards/awards.module';
+import { UserModule } from './user/user.module';
 import typeorm from './config/typeorm';
+import { FirebaseAdmin } from './firebase.setup';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [typeorm]
+      load: [typeorm],
+      envFilePath:".env"
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
@@ -23,12 +25,12 @@ import typeorm from './config/typeorm';
     }),
     HealthModule,
     MoviesModule,
-    ActorsModule,
+    ActorModule,
     DirectorsModule,
-    FestivalModule,
     AwardsModule,
+    UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, FirebaseAdmin],
 })
 export class AppModule {}

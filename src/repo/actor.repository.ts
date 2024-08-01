@@ -1,10 +1,18 @@
-import { EntityRepository, Like, Repository } from 'typeorm';
+// src/repositories/actor.repository.ts
+import { Injectable } from '@nestjs/common';
+import { Repository, Like } from 'typeorm';
 import { Actor } from 'src/entities/actor.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
-@EntityRepository(Actor)
-export class ActorRepository extends Repository<Actor> {
+@Injectable()
+export class ActorRepository {
+  constructor(
+    @InjectRepository(Actor)
+    private readonly repository: Repository<Actor>,
+  ) {}
+
   async findOneWithRelations(uuId: string): Promise<Actor> {
-    return this.findOne({
+    return this.repository.findOne({
       where: { uuId },
       relations: ['awards', 'movieActorActors', 'movieActorActors.movie'],
     });
@@ -15,6 +23,10 @@ export class ActorRepository extends Repository<Actor> {
     if (name) {
       searchCriteria.name = Like(`%${name}%`);
     }
-    return this.find({ where: searchCriteria });
+    return this.repository.find({ where: searchCriteria });
+  }
+
+  async find(): Promise<Actor[]> {
+    return this.repository.find();
   }
 }

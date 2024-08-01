@@ -1,23 +1,17 @@
-import {
-  Injectable,
-  NotFoundException,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Actor } from 'src/entities/actor.entity';
+// src/actor/actor.service.ts
+import { Injectable, NotFoundException, HttpException, HttpStatus } from '@nestjs/common';
 import { ActorRepository } from '../repo/actor.repository';
+import { Actor } from 'src/entities/actor.entity';
 
 @Injectable()
-export class ActorsService {
+export class ActorService {
   constructor(
-    @InjectRepository(ActorRepository)
-    private actorsRepository: ActorRepository,
+    private readonly actorRepository: ActorRepository,
   ) {}
 
   async findAllActors(): Promise<Actor[]> {
     try {
-      return await this.actorsRepository.find();
+      return await this.actorRepository.find();
     } catch (error) {
       throw new HttpException(
         `Failed to retrieve actors, ${error.message}`,
@@ -28,7 +22,7 @@ export class ActorsService {
 
   async searchActors(name?: string): Promise<Actor[]> {
     try {
-      return await this.actorsRepository.searchByName(name);
+      return await this.actorRepository.searchByName(name);
     } catch (error) {
       throw new HttpException(
         `Failed to search actors, ${error.message}`,
@@ -39,7 +33,7 @@ export class ActorsService {
 
   async getActorByUuId(uuId: string): Promise<Actor> {
     try {
-      const actor = await this.actorsRepository.findOneWithRelations(uuId);
+      const actor = await this.actorRepository.findOneWithRelations(uuId);
 
       if (!actor) {
         throw new NotFoundException(`Actor with ID ${uuId} not found`);

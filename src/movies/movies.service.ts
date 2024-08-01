@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, HttpException, HttpStatus } from '@nestj
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from 'src/entities/movie.entity';
 import { Like, Repository } from 'typeorm';
-import {pagination_page,pagination_limit} from '../const/const.js'
+import {pagination_page,pagination_limit} from '../const/const'
 
 @Injectable()
 export class MoviesService {

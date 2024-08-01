@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Post, Query, Param } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from 'src/entities/movie.entity';
+import {pagination_page,pagination_limit} from '../const/const'
+
 
 @Controller('movies')
 export class MoviesController {
@@ -19,8 +21,8 @@ export class MoviesController {
   @Get('paginated')
   async getMovies(
     @Query('sortBy') sortBy: 'releaseDate' | 'rating',
-    @Query('page') page = 1,
-    @Query('limit') limit = 8,
+    @Query('page') page = pagination_page,
+    @Query('limit') limit = pagination_limit,
   ): Promise<{ data: Movie[]; count: number }> {
     return this.moviesService.getPaginatedMovies(
       sortBy,

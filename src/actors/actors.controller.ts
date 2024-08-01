@@ -1,10 +1,10 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { Actor } from 'src/entities/actor.entity';
-import { ActorsService } from './actors.service';
+import { ActorService } from '../actors/actors.service';
 
 @Controller('actors')
 export class ActorsController {
-  constructor(private actorsService: ActorsService) {}
+  constructor(private actorsService: ActorService) {}
 
   @Get()
   async findAll(): Promise<Actor[]> {
