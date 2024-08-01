@@ -8,8 +8,12 @@ import {
 import { Movie } from './movie.entity';
 import { MovieActorActor } from './movieActorActor.entity';
 import { Awards } from './award.entity';
-import {Gender} from '../enum';
 
+
+export enum Gender {
+  MALE = 'Male',
+  FEMALE = 'Female',
+}
 
 @Entity()
 export class Actor {

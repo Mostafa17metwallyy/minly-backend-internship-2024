@@ -10,7 +10,7 @@ export class MovieActorActor {
   @PrimaryColumn({ type: 'bigint' })
   actorId: number;
 
-  @Column({ type: 'varchar'})
+  @Column({ type: 'varchar',nullable:true})
   character: string;
 
   @ManyToOne(() => Movie, movie => movie.movieActorActors)
