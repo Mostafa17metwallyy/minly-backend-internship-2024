@@ -1,22 +1,12 @@
-import { Controller, Get } from "@nestjs/common";
-import { Auth } from "./decorators/auth.decorator";
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-    @Get("/morning")
-    @Auth("ADMIN")
-    goodMorning() {
-        return "Good Morning!";
-    }
+  constructor(private readonly appService: AppService) {}
 
-    @Get("/afternoon")
-    @Auth("DEVELOPER")
-    goodAfternoon() {
-        return "Good Afternoon!";
-    }
-
-    @Get("/evening")
-    goodEvening() {
-        return "Good Evening!";
-    }
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
 }
